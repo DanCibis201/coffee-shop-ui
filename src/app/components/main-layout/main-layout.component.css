@@ -1,0 +1,36 @@
+nav {
+  background-color: #333333;
+  color: #fff;
+  padding: 1rem;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.site-name {
+  font-family: 'Courier New', Courier, monospace; /* Change to your preferred font */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 2rem; /* Adjusted gap for spacing */
+  margin-left: auto; /* Move the list to the right */
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a.active {
+  text-decoration: underline;
+}

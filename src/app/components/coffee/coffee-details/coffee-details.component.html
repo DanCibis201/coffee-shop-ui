@@ -1,0 +1,21 @@
+<div *ngIf="coffee" class="coffee-details">
+    <div class="coffee-image">
+      <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" />
+    </div>
+    
+    <div class="separator"></div>
+    
+    <div class="coffee-info">
+      <h2>{{ coffee.name }}</h2>
+      <p>Price: {{ coffee.price }} MDL</p>
+      <div style="margin-top: 10px;">
+        <p class="details-header">Details:</p>
+        <p>{{ coffee.description }}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!coffee">
+    <p>Loading coffee details...</p>
+  </div>
+  

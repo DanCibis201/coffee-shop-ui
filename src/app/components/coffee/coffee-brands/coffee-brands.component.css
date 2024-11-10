@@ -1,0 +1,44 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+}
+
+.coffee-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;  /* Set a fixed width for each card */
+}
+
+.coffee-card:hover {
+    box-shadow: 0 4px 16px rgba(42, 82, 190, 0.6);
+    transform: scale(1.05);
+}
+
+.coffee-image {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    border-radius: 8px;
+}
+
+.coffee-info h3 {
+    margin: 10px 0 5px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.coffee-info p {
+    font-size: 1.1rem;
+    color: #666;
+}

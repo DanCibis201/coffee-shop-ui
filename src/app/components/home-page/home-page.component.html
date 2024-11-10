@@ -1,0 +1,19 @@
+<div class="image-gallery">
+  <div class="row">
+    <div style="display: flex; justify-content: space-around; margin: auto;">
+      <h1>Welcome to ECoffeeShop</h1>
+    </div>
+  </div>
+    <div class="image-container">
+      <button class="prev-button" (click)="prevImage()">&#10094;</button>
+      <img [src]="images[currentImage]" alt="CoffeeLoversImages" class="gallery-image" />
+      <button class="next-button" (click)="nextImage()">&#10095;</button>
+    </div>
+
+    <div class="image-indicators">
+      <span *ngFor="let image of images; let i = index"
+            [class.active]="i === currentImage"
+            (click)="currentImage = i">
+      </span>
+  </div>
+</div>
