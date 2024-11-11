@@ -13,7 +13,7 @@ nav {
 }
 
 .site-name {
-  font-family: 'Courier New', Courier, monospace; /* Change to your preferred font */
+  font-family: 'Courier New', Courier, monospace;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -22,8 +22,8 @@ nav ul {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 2rem; /* Adjusted gap for spacing */
-  margin-left: auto; /* Move the list to the right */
+  gap: 2rem;
+  margin-left: auto;
 }
 
 nav ul li a {
@@ -33,4 +33,8 @@ nav ul li a {
 
 nav ul li a.active {
   text-decoration: underline;
+}
+
+nav ul li a i {
+  margin-right: 2px;
 }

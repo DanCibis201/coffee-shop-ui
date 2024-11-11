@@ -46,3 +46,44 @@
     font-weight: bold;
   }
   
+  .reviews-section {
+    margin-top: 15px;
+    max-width: 600px;
+    justify-content: space-between; 
+    flex-wrap: wrap;
+}
+
+.review-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-text-header
+{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.username {
+  color: #333;
+}
+
+.rating {
+  color: #f39c12;
+}
+
+.comment {
+  font-style: italic;
+  margin-top: 8px;
+  color: #555;
+}

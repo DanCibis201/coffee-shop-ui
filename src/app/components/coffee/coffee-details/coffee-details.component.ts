@@ -25,7 +25,7 @@ export class CoffeeDetailsComponent implements OnInit {
       const coffeeId = this.route.snapshot.paramMap.get('id');
       if (coffeeId) {
         this.coffeeService.getCoffeeBrandById(coffeeId).subscribe(
-          coffee => this.coffee = coffee,
+          coffee => (this.coffee = coffee),
           error => console.error('Error loading coffee details:', error)
         );
       }

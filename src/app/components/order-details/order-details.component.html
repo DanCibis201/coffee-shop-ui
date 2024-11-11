@@ -1,0 +1,39 @@
+<div *ngIf="orders && orders.length > 0" class="orders-wrapper">
+
+  <h2 style="margin-left:20px;">Order Details</h2>
+
+  <div *ngFor="let order of orders" class="order-card">
+    <div class="order-info">
+      
+      <div *ngIf="order.coffeeId && coffeeDetailsMap[order.coffeeId]" class="order-coffee">
+        <img [src]="coffeeDetailsMap[order.coffeeId].imageUrl" alt="Coffee Image" class="coffee-image" />
+        <div class="order-details">
+          <p><strong>Coffee Name:</strong> {{ coffeeDetailsMap[order.coffeeId].name }}</p>
+          <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+          <p><strong>Order Date:</strong> {{ order.orderDate | date: 'short' }}</p>
+        </div>
+      </div>
+
+      <div *ngIf="!coffeeDetailsMap[order.coffeeId]" class="no-coffee">
+        <p>No coffee details available</p>
+      </div>
+    </div>
+
+    <div class="order-actions">
+      <button class="action-btn edit-btn">
+        <i class="fa fa-pencil"></i>
+      </button>
+      <button (click)="deleteOrder(order.id)" class="action-btn delete-btn">
+        <i class="fa fa-trash"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!orders || orders.length === 0">
+  <p>No orders available.</p>
+</div>
+
+<div *ngIf="!orders">
+  <p>Loading orders...</p>
+</div>

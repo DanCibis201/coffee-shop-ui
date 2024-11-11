@@ -2,9 +2,9 @@
     <div class="coffee-image">
       <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" />
     </div>
-    
+
     <div class="separator"></div>
-    
+
     <div class="coffee-info">
       <h2>{{ coffee.name }}</h2>
       <p>Price: {{ coffee.price }} MDL</p>
@@ -12,9 +12,20 @@
         <p class="details-header">Details:</p>
         <p>{{ coffee.description }}</p>
       </div>
+      
+      <div *ngIf="coffee?.reviews?.length" class="reviews-section" style="margin-top: 20px;">
+        <h3 class="review-text-header">Customer Reviews</h3>
+        <div *ngFor="let review of coffee?.reviews" class="review-card">
+          <div class="review-header">
+            <span class="username">{{ review.userName }}</span>
+            <span class="rating">Rating: {{ review.rating }}/10</span>
+          </div>
+          <p class="comment">{{ review.comment }}</p>
+        </div>
+      </div>
     </div>
   </div>
-  
+
   <div *ngIf="!coffee">
     <p>Loading coffee details...</p>
   </div>

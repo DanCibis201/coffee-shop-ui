@@ -1,0 +1,81 @@
+/* General page styling */
+.about-us {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+  }
+  
+  /* Header Section */
+  .about-us-header {
+    text-align: center;
+    background-color: #2a52be;
+    color: white;
+    padding: 40px 20px;
+  }
+  
+  .about-us-header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .about-us-header p {
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
+  
+  /* Content Sections */
+  .about-us-content {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .about-us-section {
+    margin-bottom: 30px;
+  }
+  
+  .about-us-section h2 {
+    font-size: 2rem;
+    color: #2a52be;
+    margin-bottom: 15px;
+  }
+  
+  .about-us-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  /* Footer Section */
+  .about-us-footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #2a52be;
+    color: white;
+  }
+  
+  .about-us-footer p {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .about-us-header h1 {
+      font-size: 2.5rem;
+    }
+  
+    .about-us-header p {
+      font-size: 1.2rem;
+    }
+  
+    .about-us-section h2 {
+      font-size: 1.8rem;
+    }
+  
+    .about-us-section p {
+      font-size: 1.1rem;
+    }
+  }
+  
