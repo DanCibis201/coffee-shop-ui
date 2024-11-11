@@ -9,7 +9,6 @@ import { Coffee } from '../models/coffee';
 export class CoffeeService {
   private apiUrl = 'https://localhost:7149/api/coffee';
 
-
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

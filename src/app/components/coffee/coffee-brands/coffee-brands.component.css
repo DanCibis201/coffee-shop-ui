@@ -13,11 +13,11 @@
     margin: 10px;
     border-radius: 10px;
     background-color: #f8f9fa;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     cursor: pointer;
     text-align: center;
-    width: 200px;  /* Set a fixed width for each card */
+    width: 400px;
 }
 
 .coffee-card:hover {

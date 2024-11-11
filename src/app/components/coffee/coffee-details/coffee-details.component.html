@@ -1,21 +1,56 @@
 <div *ngIf="coffee" class="coffee-details">
-    <div class="coffee-image">
-      <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" />
+  <div class="coffee-image">
+    <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" />
+  </div>
+
+  <div class="separator"></div>
+
+  <div class="coffee-info">
+    <h2>{{ coffee.name }}</h2>
+    
+    <div class="price-order-container">
+      <p class="price">Price: {{ coffee.price }} MDL</p>
+      <button class="place-order-button" (click)="openOrderModal()">Place Order</button>
     </div>
-    
-    <div class="separator"></div>
-    
-    <div class="coffee-info">
-      <h2>{{ coffee.name }}</h2>
-      <p>Price: {{ coffee.price }} MDL</p>
-      <div style="margin-top: 10px;">
-        <p class="details-header">Details:</p>
-        <p>{{ coffee.description }}</p>
+
+    <div style="margin-top: 10px;">
+      <p class="details-header">Details:</p>
+      <p>{{ coffee.description }}</p>
+    </div>
+
+    <div *ngIf="coffee?.reviews?.length" class="reviews-section" style="margin-top: 20px;">
+      <h3 class="review-text-header">Customer Reviews</h3>
+      <div *ngFor="let review of coffee?.reviews" class="review-card">
+        <div class="review-header">
+          <span class="username">{{ review.userName }}</span>
+          <span class="rating">Rating: {{ review.rating }}/10</span>
+        </div>
+        <p class="comment">{{ review.comment }}</p>
       </div>
     </div>
   </div>
-  
-  <div *ngIf="!coffee">
-    <p>Loading coffee details...</p>
+</div>
+
+<!--Display popup window for quantity selection-->
+<div *ngIf="isModalOpen" class="modal-overlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Select Quantity</h3>
+      <button class="close-modal" (click)="closeOrderModal()">X</button>
+    </div>
+    <div class="modal-body">
+      <div class="quantity-selector">
+        <button (click)="decreaseQuantity()" class="quantity-button">-</button>
+        <input type="number" [(ngModel)]="quantity" min="1" class="quantity-input" />
+        <button (click)="increaseQuantity()" class="quantity-button">+</button>
+      </div>
+      <div style="margin-top: 20px;">
+        <button (click)="placeOrder()" class="add-to-cart-button">Add to Cart</button>
+      </div>
+    </div>
   </div>
-  
+</div>
+
+<div *ngIf="!coffee">
+  <p>Loading coffee details...</p>
+</div>
