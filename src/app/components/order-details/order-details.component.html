@@ -8,12 +8,13 @@
       <div *ngIf="order.coffeeId && coffeeDetailsMap[order.coffeeId]" class="order-coffee">
         <img [src]="coffeeDetailsMap[order.coffeeId].imageUrl" alt="Coffee Image" class="coffee-image" />
         <div class="order-details">
-          <p><strong>Coffee Name:</strong> {{ coffeeDetailsMap[order.coffeeId].name }}</p>
+          <p><strong>Coffee:</strong> {{ coffeeDetailsMap[order.coffeeId].name }}</p>
+          <p><strong>Price:</strong> {{ coffeeDetailsMap[order.coffeeId].price }}</p>
           <p><strong>Quantity:</strong> {{ order.quantity }}</p>
           <p><strong>Order Date:</strong> {{ order.orderDate | date: 'short' }}</p>
+          <p><strong>Total:</strong> {{ calculateOrderTotal(order.coffeeId, order.quantity) }} MDL</p>
         </div>
       </div>
-
       <div *ngIf="!coffeeDetailsMap[order.coffeeId]" class="no-coffee">
         <p>No coffee details available</p>
       </div>
@@ -28,6 +29,10 @@
       </button>
     </div>
   </div>
+</div>
+
+<div class="total-price">
+  <h3>Total Sum: {{ calculateTotalPrice() }} MDL</h3>
 </div>
 
 <div *ngIf="!orders || orders.length === 0">

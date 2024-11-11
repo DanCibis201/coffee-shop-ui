@@ -47,20 +47,17 @@ ngOnInit(): void {
       }
     });
   }
-
-  // Open the modal by setting the flag to true
+  
   openDeleteConfirmation(orderId: string): void {
     this.selectedOrderId = orderId;
-    this.isModalVisible = true; // Show the modal
+    this.isModalVisible = true;
   }
 
-  // Close the modal
   closeModal(): void {
     this.isModalVisible = false;
-    this.selectedOrderId = null; // Reset selected order
+    this.selectedOrderId = null;
   }
 
-  // Handle the actual deletion after confirmation
   deleteOrder(orderId: string): void {
     if (confirm('Are you sure you want to delete this order?')) {
       this.orderService.deleteOrder(orderId).subscribe(() => {
@@ -72,8 +69,21 @@ ngOnInit(): void {
     }
   }
 
-  // Handle cancel action
   cancelDelete(): void {
-    this.closeModal(); // Close the modal if canceled
+    this.closeModal();
+  }
+
+  calculateOrderTotal(coffeeId: string, quantity: number): number {
+    const coffee = this.coffeeDetailsMap[coffeeId];
+    if (coffee) {
+      return coffee.price * quantity;
+    }
+    return 0;
+  }
+
+  calculateTotalPrice(): number {
+    return this.orders.reduce((total, order) => {
+      return total + this.calculateOrderTotal(order.coffeeId, order.quantity);
+    }, 0);
   }
 }

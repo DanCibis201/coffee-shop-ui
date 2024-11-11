@@ -131,3 +131,9 @@
   font-size: 1.5rem;
 }
 
+.total-price {
+  margin-top: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-left: 20px;
+}

@@ -26,4 +26,8 @@ export class OrderService {
   deleteOrder(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  placeOrder(order: { coffeeId: string; quantity: number }): Observable<any> {
+    return this.http.post(this.apiUrl, order);
+  }
 }
