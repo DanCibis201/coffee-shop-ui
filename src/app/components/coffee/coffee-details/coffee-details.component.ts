@@ -69,7 +69,6 @@ export class CoffeeDetailsComponent implements OnInit {
 
       this.orderService.placeOrder(order).subscribe(
         response => {
-          alert('Order placed successfully!');
           this.closeOrderModal();
         },
         error => {

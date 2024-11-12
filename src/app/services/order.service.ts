@@ -30,4 +30,8 @@ export class OrderService {
   placeOrder(order: { coffeeId: string; quantity: number }): Observable<any> {
     return this.http.post(this.apiUrl, order);
   }
+
+  updateOrder(order: Order): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${order.id}`, order, this.httpOptions);
+  }
 }
