@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,13 +8,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent {
+export class HomePageComponent implements OnInit {
   images: string[] = [
     'https://images.hdqwalls.com/wallpapers/i-love-coffee.jpg',
     'https://w0.peakpx.com/wallpaper/531/501/HD-wallpaper-coffee-espresso-latte-art-cup-food.jpg',
   ];
   currentImage = 0;
   imageInterval: any;
+  messageOfTheDay: string = "Start your day with a cup of joy. Every sip counts!";
+  specialOffer: string | null = "Get 20% off on all coffee products this weekend only!";
 
   ngOnInit() {
     this.startAutoSwitch();

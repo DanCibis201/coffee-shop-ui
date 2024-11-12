@@ -18,7 +18,9 @@ export class OrderDetailsComponent implements OnInit {
   orders: Order[] = [];
   coffeeDetailsMap: { [key: string]: Coffee } = {};
   selectedOrderId: string | null = null;
-  isModalVisible: boolean = false;
+  newQuantity: number | null = null;
+  isEditModalVisible: boolean = false;
+  isDeleteModalVisible: boolean = false;
 
   constructor(
     private orderService: OrderService,
@@ -48,29 +50,67 @@ ngOnInit(): void {
     });
   }
   
-  openDeleteConfirmation(orderId: string): void {
+  openDeleteModal(orderId: string): void {
     this.selectedOrderId = orderId;
-    this.isModalVisible = true;
+    this.isDeleteModalVisible = true;
   }
 
-  closeModal(): void {
-    this.isModalVisible = false;
+  closeDeleteModal(): void {
+    this.isDeleteModalVisible = false;
     this.selectedOrderId = null;
   }
 
-  deleteOrder(orderId: string): void {
-    if (confirm('Are you sure you want to delete this order?')) {
-      this.orderService.deleteOrder(orderId).subscribe(() => {
-        this.orders = this.orders.filter(order => order.id !== orderId);
-        alert('Order deleted successfully.');
-      }, error => {
-        alert('Failed to delete the order. Please try again.');
-      });
+
+  cancelDelete(): void {
+    this.closeDeleteModal();
+  } 
+   
+  confirmDeleteOrder(): void {
+    if (this.selectedOrderId) {
+      this.orderService.deleteOrder(this.selectedOrderId).subscribe(
+        () => {
+          this.orders = this.orders.filter(order => order.id !== this.selectedOrderId);
+          this.closeDeleteModal();
+        },
+        error => {
+          alert('Failed to delete the order. Please try again.');
+          this.closeDeleteModal();
+        }
+      );
     }
   }
 
-  cancelDelete(): void {
-    this.closeModal();
+  openEditModal(orderId: string, currentQuantity: number): void {
+    this.selectedOrderId = orderId;
+    this.newQuantity = currentQuantity;
+    this.isEditModalVisible = true;
+  }
+
+  closeEditModal(): void {
+    this.isEditModalVisible = false;
+    this.selectedOrderId = null;
+    this.newQuantity = null;
+  }
+
+  updateOrder(): void {
+    if (this.selectedOrderId && this.newQuantity !== null) {
+      const updatedOrder = {
+        id: this.selectedOrderId,
+        coffeeId: this.orders.find(order => order.id === this.selectedOrderId)?.coffeeId,
+        quantity: this.newQuantity,
+        orderDate: new Date,
+      } as Order;
+
+      this.orderService.updateOrder(updatedOrder).subscribe(() => {
+        const orderIndex = this.orders.findIndex(order => order.id === this.selectedOrderId);
+        if (orderIndex !== -1) {
+          this.orders[orderIndex] = updatedOrder;
+        }
+        this.closeEditModal();
+      }, error => {
+        alert('Failed to update the order. Please try again.');
+      });
+    }
   }
 
   calculateOrderTotal(coffeeId: string, quantity: number): number {
