@@ -21,10 +21,10 @@
     </div>
 
     <div class="order-actions">
-      <button class="action-btn edit-btn">
+      <button (click)="openEditModal(order.id, order.quantity)" class="action-btn edit-btn">
         <i class="fa fa-pencil"></i>
       </button>
-      <button (click)="deleteOrder(order.id)" class="action-btn delete-btn">
+      <button (click)="openDeleteModal(order.id)" class="action-btn delete-btn">
         <i class="fa fa-trash"></i>
       </button>
     </div>
@@ -33,6 +33,32 @@
 
 <div class="total-price">
   <h3>Total Sum: {{ calculateTotalPrice() }} MDL</h3>
+</div>
+
+<!-- Edit Modal -->
+<div *ngIf="isEditModalVisible" class="modal">
+  <div class="modal-content">
+    <h3>Edit Order Quantity</h3>
+    <label for="quantity">New Quantity:</label>
+    <input type="number" [(ngModel)]="newQuantity" min="1" />
+
+    <div class="modal-actions">
+      <button (click)="updateOrder()" class="btn save-btn">Save</button>
+      <button (click)="closeEditModal()" class="btn cancel-btn">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div *ngIf="isDeleteModalVisible" class="modal">
+  <div class="modal-content">
+    <h3>Delete Order</h3>
+    <p>Are you sure you want to delete this order?</p>
+    <div class="modal-actions">
+      <button (click)="confirmDeleteOrder()" class="btn save-btn">Yes</button>
+      <button (click)="closeDeleteModal()" class="btn cancel-btn">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="!orders || orders.length === 0">
