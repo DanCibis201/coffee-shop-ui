@@ -1,0 +1,23 @@
+<div class="form-container">
+
+    <p class="title">Register</p>
+
+    <form class="form" (ngSubmit)="onRegister()">
+        <input id="email" type="email" class="input" placeholder="Email" [(ngModel)]="email" name="email" required>
+
+        <div class="password-wrapper">
+            <input id="password" [type]="isPasswordVisible ? 'text' : 'password'" class="input" placeholder="Password"
+                [(ngModel)]="password" name="password" required>
+            <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()"
+                aria-hidden="true"></i>
+        </div>
+
+        <button class="form-btn" type="submit">Register</button>
+    </form>
+
+    <p class="log-in-label">
+        Already have an account?
+        <br>
+        <span class="log-in-link" (click)="goToLogin()">Log in</span>
+    </p>
+</div>
