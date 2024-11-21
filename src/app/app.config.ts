@@ -9,6 +9,9 @@ import { CoffeeDetailsComponent } from './components/coffee/coffee-details/coffe
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { OrderDetailsComponent } from './components/order-details/order-details.component';
+import { LoginComponent } from './authentication/login-page/login.component';
+import { LogoutComponent } from './authentication/logout.component';
+import { RegisterComponent } from './authentication/register-page/register.component';
 
 const routes: Routes = [
   {
@@ -20,7 +23,10 @@ const routes: Routes = [
       { path: 'coffee/:id', component: CoffeeDetailsComponent},
       { path: 'about-us', component: AboutUsComponent},
       { path: 'contact', component: ContactComponent},
-      { path: 'orders', component: OrderDetailsComponent}
+      { path: 'login', component: LoginComponent},
+      { path: 'orders', component: OrderDetailsComponent},
+      { path: 'logout', component: LogoutComponent},
+      { path: 'register', component: RegisterComponent}
     ]
   }
 ];
