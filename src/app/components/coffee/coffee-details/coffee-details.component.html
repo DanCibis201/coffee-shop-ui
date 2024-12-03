@@ -20,15 +20,22 @@
 
     <div *ngIf="coffee?.reviews?.length" class="reviews-section" style="margin-top: 20px;">
       <h3 class="review-text-header">Customer Reviews</h3>
-      <div *ngFor="let review of coffee?.reviews" class="review-card">
+      <div class="review-card" *ngIf="currentReview">
         <div class="review-header">
-          <span class="username">{{ review.userName }}</span>
-          <span class="rating">Rating: {{ review.rating }}/10</span>
+          <span class="username">{{ currentReview.userName }}</span>
+          <span class="rating">Rating: {{ currentReview.rating }}/10</span>
         </div>
-        <p class="comment">{{ review.comment }}</p>
+        <p class="comment">{{ currentReview.comment }}</p>
+      </div>
+      <div class="review-dots">
+        <span 
+          *ngFor="let review of coffee?.reviews; let i = index" 
+          class="dot" 
+          [class.active]="i === reviewIndex"
+          (click)="goToReview(i)">
+        </span>
       </div>
     </div>
-  </div>
 </div>
 
 <!--Display popup window for quantity selection-->

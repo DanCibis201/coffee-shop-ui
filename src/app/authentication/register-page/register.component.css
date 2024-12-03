@@ -94,10 +94,9 @@
     padding-right: 54%;
 }
 
-
 .log-in-label {
     margin: 0;
-    font-size: 13px;
+    font-size: 15px;
     color: #747474;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -113,4 +112,16 @@
     font-weight: 800;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
           "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+
+  .input-error {
+    border-color: red;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 15px;
+    margin: 0;
+    margin-top: -10px;
+    margin-left: 10px;
   }

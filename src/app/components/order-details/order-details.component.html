@@ -1,5 +1,9 @@
 <div *ngIf="orders && orders.length > 0" class="orders-wrapper">
 
+  <div *ngIf="!orders">
+    <p>Loading orders...</p>
+  </div>
+  
   <h2 style="margin-left:20px;">Order Details</h2>
 
   <div *ngFor="let order of orders" class="order-card">
@@ -31,6 +35,10 @@
   </div>
 </div>
 
+<div *ngIf="!orders || orders.length === 0" class="no-orders-available">
+  <p>No orders available.</p>
+</div>
+
 <div class="total-price">
   <h3>Total Sum: {{ calculateTotalPrice() }} MDL</h3>
 </div>
@@ -59,12 +67,4 @@
       <button (click)="closeDeleteModal()" class="btn cancel-btn">Cancel</button>
     </div>
   </div>
-</div>
-
-<div *ngIf="!orders || orders.length === 0">
-  <p>No orders available.</p>
-</div>
-
-<div *ngIf="!orders">
-  <p>Loading orders...</p>
 </div>

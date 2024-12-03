@@ -5,6 +5,8 @@ import { Coffee } from '../../../models/coffee';
 import { ActivatedRoute } from '@angular/router';
 import { CoffeeService } from '../../../services/coffee.service';
 import { OrderService } from '../../../services/order.service';
+import { NotificationService } from '../../../services/notification.service';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-coffee-details',
@@ -16,14 +18,19 @@ import { OrderService } from '../../../services/order.service';
 
 export class CoffeeDetailsComponent implements OnInit {
   coffee: Coffee | null = null;
+  coffeeId: string | null = null;
+  currentReview: { userName: string; rating: number; comment: string } | null = null;
+  reviewIndex: number = 0;
+  reviewSubscription: Subscription | null = null;
   isModalOpen = false;
   quantity: number = 1;
-  coffeeId: string | null = null;
+
 
   constructor(
     private route: ActivatedRoute,
     private coffeeService: CoffeeService,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +39,9 @@ export class CoffeeDetailsComponent implements OnInit {
       this.coffeeService.getCoffeeBrandById(coffeeId).subscribe(
         coffee => {
           this.coffee = coffee;
+          if (coffee.reviews?.length) {
+            this.startReviewRotation();
+          }
         },
         error => console.error('Error loading coffee details:', error)
       );
@@ -40,6 +50,7 @@ export class CoffeeDetailsComponent implements OnInit {
     }
   }
 
+  //#region PlaceOrderFunctionality
   openOrderModal() {
     this.isModalOpen = true;
   }
@@ -70,6 +81,7 @@ export class CoffeeDetailsComponent implements OnInit {
       this.orderService.placeOrder(order).subscribe(
         response => {
           this.closeOrderModal();
+          this.notificationService.showNotification('Order placed successfully!', '#4caf50', 'white')
         },
         error => {
           alert('Failed to place order. Please try again.');
@@ -79,4 +91,42 @@ export class CoffeeDetailsComponent implements OnInit {
       console.error('Invalid order details: coffeeId or quantity is missing');
     }
   }
+  //#endregion
+
+  //#region ReviewSwappingFunctionality
+  ngOnDestroy(): void {
+    this.stopReviewRotation();
+  }
+
+  startReviewRotation() {
+    this.updateCurrentReview();
+    this.reviewSubscription = interval(20000).subscribe(() => {
+      this.nextReview();
+    });
+  }
+
+  stopReviewRotation() {
+    this.reviewSubscription?.unsubscribe();
+  }
+
+  updateCurrentReview() {
+    if (this.coffee?.reviews?.length) {
+      this.currentReview = this.coffee.reviews[this.reviewIndex];
+    }
+  }
+
+  nextReview() {
+    if (this.coffee?.reviews?.length) {
+      this.reviewIndex = (this.reviewIndex + 1) % this.coffee.reviews.length;
+      this.updateCurrentReview();
+    }
+  }
+
+  goToReview(index: number) {
+    this.stopReviewRotation();
+    this.reviewIndex = index;
+    this.updateCurrentReview();
+    this.startReviewRotation();
+  }
+  //#endregion
 }

@@ -32,6 +32,18 @@
   padding: 12px 15px;
 }
 
+.input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 15px;
+  margin: 0;
+  margin-top: -10px;
+  margin-left: 10px;
+}
+
 .page-link {
   text-decoration: underline;
   margin: 0;

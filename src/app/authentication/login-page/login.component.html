@@ -1,16 +1,34 @@
 <div class="form-container">
-
   <p class="title">Welcome</p>
 
   <form class="form" (ngSubmit)="onLogin()">
-    <input id="email" type="email" class="input" placeholder="Email" [(ngModel)]="email" name="email" required>
+    <input
+      id="email"
+      type="email"
+      class="input"
+      placeholder="Email"
+      [(ngModel)]="email"
+      name="email"
+      [ngClass]="{ email }"
+      required
+    />
+    <div *ngIf="!email" class="error-message">Email field is required.</div>
 
     <div class="password-wrapper">
-      <input id="password" [type]="isPasswordVisible ? 'text' : 'password'" class="input" placeholder="Password"
-        [(ngModel)]="password" name="password" required>
-      <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()"
-        aria-hidden="true"></i>
+      <input
+        id="password"
+        [type]="isPasswordVisible ? 'text' : 'password'"
+        class="input"
+        placeholder="Password"
+        [(ngModel)]="password"
+        name="password"
+        [ngClass]="{ password }"
+        required
+      />
+      <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()" aria-hidden="true"></i>
     </div>
+    <div *ngIf="!password" class="error-message">Password field is required.</div>
+    <div *ngIf="invalidCredentials" class="error-message">Email or password is incorrect.</div>
 
     <p class="page-link">
       <span class="page-link-label">Forgot Password?</span>

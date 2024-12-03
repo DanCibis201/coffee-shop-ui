@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Coffee } from '../../../models/coffee';
 import { CoffeeService } from '../../../services/coffee.service';
+import { CoffeeBrand } from '../../../models/mapping/coffee-brand.enum';
 
 @Component({
   selector: 'app-coffee-brands',
@@ -18,7 +19,10 @@ export class CoffeeBrandsComponent implements OnInit {
     name: '',
     price: 0,
     description: '',
-    imageUrl: ''
+    intensity: 0,
+    imageUrl: '',
+    type: 0,
+    brand: 0
   };
 
   constructor(private coffeeService: CoffeeService, private router: Router) { }
@@ -35,5 +39,8 @@ export class CoffeeBrandsComponent implements OnInit {
   viewDetails(coffeeId: string): void {
     this.router.navigate(['/coffee/', coffeeId]);
   }
-  
+
+  getBrandName(brand: number): string {
+    return CoffeeBrand[brand]
+  }
 }
