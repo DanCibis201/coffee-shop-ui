@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-container">
-    <div class="site-name">CoffeeShop</div>
+    <div class="site-name">CoffeeLovers <i class="fa-solid fa-mug-hot"></i></div>
     <ul>
       <li>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -16,19 +16,26 @@
       </li>
       <br>
       <li>
-        <a routerLink="/login" routerLinkActive="active">
-          <i class="fa-regular fa-user"></i>
-        </a>
-      </li>
-      <li>
         <a routerLink="/orders" routerLinkActive="active">
           <i class="fas fa-shopping-cart"></i>
         </a>
       </li>
-      <li>
-        <a routerLink="/logout" routerLinkActive="active">
-          <i class="fa-solid fa-right-to-bracket"></i>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/login" routerLinkActive="active">
+          <i class="fa-regular fa-user"></i>
         </a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i class="fa-regular fa-user"></i>
+            <i style="margin-left: 5px;" class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a routerLink="/profile" routerLinkActive="active"><i class="fa-solid fa-gear" style="margin-left: 10px;"></i> Profile</a>
+            <a (click)="logout()"><i class="fa-solid fa-right-to-bracket" style="margin-left: 10px;"></i> Logout</a>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

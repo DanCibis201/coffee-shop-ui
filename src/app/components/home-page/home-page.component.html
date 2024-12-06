@@ -1,46 +1,15 @@
-<div class="image-gallery">
-  <div class="row">
-    <div style="text-align: center;">
-      <h1>Welcome to ECoffeeShop</h1>
-      <p>Your daily dose of freshly brewed coffee awaits! Dive into the world of rich flavors and aromatic blends.</p>
+<div class="home" id="home">
+  <div class="content">
+    <div class="row">
+      <div style="text-align: center; color: #fff;">
+        <h1 style="text-transform: uppercase;">Welcome to Coffee-Shop</h1>
+        <p>Your daily dose of freshly brewed coffee awaits! Dive into the world of rich flavors and aromatic blends.</p>
+      </div>
+    </div>
+    <div class="quote-section">
+      <p class="quote">
+        "Coffee is a language in itself." — Jackie Chan
+      </p>
     </div>
   </div>
-
-  <div class="quote-section">
-    <p class="quote">
-      "Coffee is a language in itself." — Jackie Chan
-    </p>
-  </div>
-
-  <div class="image-container">
-    <button class="prev-button" (click)="prevImage()">&#10094;</button>
-    <img [src]="images[currentImage]" alt="CoffeeLoversImages" class="gallery-image" />
-    <button class="next-button" (click)="nextImage()">&#10095;</button>
-  </div>
-
-  <div class="image-indicators">
-    <span *ngFor="let image of images; let i = index"
-          [class.active]="i === currentImage"
-          (click)="currentImage = i">
-    </span>
-  </div>
-
-  <div class="message-section">
-    <h3>Message of the Day</h3>
-    <p>{{ messageOfTheDay }}</p>
-  </div>
-
-  <div class="about-section">
-    <h3>About ECoffeeShop</h3>
-    <p>At ECoffeeShop, we are passionate about bringing the finest coffee to your cup. Every bean is handpicked and roasted to perfection, promising you an unforgettable coffee experience.</p>
-  </div>
-
-  <div class="offer-section" *ngIf="specialOffer">
-    <h3>Special Offer</h3>
-    <p>{{ specialOffer }}</p>
-  </div>
 </div>
-
-<footer class="footer">
-  <span>&copy; Copyright CebotariDanCoffeeSRL - 2024</span>
-</footer>

@@ -1,27 +1,40 @@
-<div class="form-container">
-
-  <p class="title">Welcome</p>
-
-  <form class="form" (ngSubmit)="onLogin()">
-    <input id="email" type="email" class="input" placeholder="Email" [(ngModel)]="email" name="email" required>
-
-    <div class="password-wrapper">
-      <input id="password" [type]="isPasswordVisible ? 'text' : 'password'" class="input" placeholder="Password"
-        [(ngModel)]="password" name="password" required>
-      <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()"
-        aria-hidden="true"></i>
-    </div>
-
-    <p class="page-link">
-      <span class="page-link-label">Forgot Password?</span>
+<div class="login-background">
+  <div class="form-container">
+    <p class="title">Welcome</p>
+    <form class="form" (ngSubmit)="onLogin()">
+      <input
+        id="email"
+        type="email"
+        class="input"
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+        [ngClass]="{ email }"
+        required/>
+      <div *ngIf="!email" class="error-message">Email field is required.</div>
+      <div class="password-wrapper">
+        <input
+          id="password"
+          [type]="isPasswordVisible ? 'text' : 'password'"
+          class="input"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          [ngClass]="{ password }"
+          required/>
+        <i class="fa" [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()" aria-hidden="true"></i>
+      </div>
+      <div *ngIf="!password" class="error-message">Password field is required.</div>
+      <div *ngIf="invalidCredentials" class="error-message">Email or password is incorrect.</div>
+      <p class="page-link">
+        <span class="page-link-label">Forgot Password?</span>
+      </p>
+      <button class="form-btn" type="submit">Log in</button>
+    </form>
+    <p class="sign-up-label">
+      Don't have an account?
+      <br>
+      <span class="sign-up-link" (click)="goToRegister()">Sign up</span>
     </p>
-
-    <button class="form-btn" type="submit">Log in</button>
-  </form>
-
-  <p class="sign-up-label">
-    Don't have an account?
-    <br>
-    <span class="sign-up-link" (click)="goToRegister()">Sign up</span>
-  </p>
+  </div>
 </div>

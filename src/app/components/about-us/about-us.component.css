@@ -1,10 +1,18 @@
-/* General page styling */
+.about-us-background{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(rgba(27, 27, 27, 0.4), rgb(0, 0, 0));
+  background-size: cover;
+  background-position: center;
+}
+
 .about-us {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f8f8f8;
-    color: #333;
+    color: #ffffff;
   }
   
   /* Header Section */
@@ -12,7 +20,7 @@
     text-align: center;
     background-color: #2a52be;
     color: white;
-    padding: 40px 20px;
+    padding: 20px 20px;
   }
   
   .about-us-header h1 {
@@ -38,13 +46,14 @@
   
   .about-us-section h2 {
     font-size: 2rem;
-    color: #2a52be;
+    color: #eee;
     margin-bottom: 15px;
   }
   
   .about-us-section p {
     font-size: 1.2rem;
     line-height: 1.6;
+    color: #eee;
   }
   
   /* Footer Section */

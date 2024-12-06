@@ -18,21 +18,34 @@ export class LoginComponent {
     twoFactorRecoveryCode?: string;
     errorMessage = '';
     isPasswordVisible: boolean = false;
+    emailError: boolean = false;
+    passwordError: boolean = false;
+    invalidCredentials: boolean = false;
 
     constructor(private authService: AuthenticationService, private router: Router) { }
 
     onLogin(): void {
-        const loginPayload = {
-            email: this.email,
-            password: this.password,
-            twoFactorCode: this.twoFactorCode,
-            twoFactorRecoveryCode: this.twoFactorRecoveryCode
-        };
+        this.emailError = !this.email;
+        this.passwordError = !this.password;
 
-        this.authService.login(loginPayload).subscribe({
-            next: () => this.router.navigate(['/']),
-            error: err => this.errorMessage = 'Login failed. Please check your credentials.'
-        });
+        if (this.email && this.password) {
+            const loginPayload = {
+                email: this.email,
+                password: this.password,
+                twoFactorCode: this.twoFactorCode,
+                twoFactorRecoveryCode: this.twoFactorRecoveryCode
+            };
+
+            this.authService.login(loginPayload).subscribe({
+                next: () => {
+                    this.router.navigate(['/']);
+                },
+                error: err => {
+                    this.invalidCredentials = true;
+                    this.password = '';
+                }
+            });
+        }
     }
 
     goToRegister(): void {

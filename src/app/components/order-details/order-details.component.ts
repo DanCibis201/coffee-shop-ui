@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Coffee } from '../../models/coffee';
 import { CoffeeService } from '../../services/coffee.service';
 import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-order-details',
@@ -24,7 +25,8 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private coffeeService: CoffeeService
+    private coffeeService: CoffeeService,
+    private notificationService: NotificationService
 ) {}
 
 ngOnInit(): void {
@@ -50,6 +52,7 @@ ngOnInit(): void {
     });
   }
   
+  //#region DeleteOrderDetails
   openDeleteModal(orderId: string): void {
     this.selectedOrderId = orderId;
     this.isDeleteModalVisible = true;
@@ -59,7 +62,6 @@ ngOnInit(): void {
     this.isDeleteModalVisible = false;
     this.selectedOrderId = null;
   }
-
 
   cancelDelete(): void {
     this.closeDeleteModal();
@@ -71,6 +73,7 @@ ngOnInit(): void {
         () => {
           this.orders = this.orders.filter(order => order.id !== this.selectedOrderId);
           this.closeDeleteModal();
+          this.notificationService.showNotification('Order deleted successfuly!', 'red', 'white');
         },
         error => {
           alert('Failed to delete the order. Please try again.');
@@ -79,7 +82,9 @@ ngOnInit(): void {
       );
     }
   }
+ //#endregion
 
+ //#region EditOrderDetails
   openEditModal(orderId: string, currentQuantity: number): void {
     this.selectedOrderId = orderId;
     this.newQuantity = currentQuantity;
@@ -106,12 +111,14 @@ ngOnInit(): void {
         if (orderIndex !== -1) {
           this.orders[orderIndex] = updatedOrder;
         }
+        this.notificationService.showNotification('Order updated successfully!', '#FFD700', 'black');
         this.closeEditModal();
       }, error => {
         alert('Failed to update the order. Please try again.');
       });
     }
   }
+  //#endregion
 
   calculateOrderTotal(coffeeId: string, quantity: number): number {
     const coffee = this.coffeeDetailsMap[coffeeId];

@@ -1,3 +1,12 @@
+.order-background{
+  min-height: 87.4vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(rgba(27, 27, 27, 0.4), rgb(0, 0, 0));
+  background-size: cover;
+  background-position: center;
+}
+
 .order-wrapper {
     display: flex;
     justify-content: center;
@@ -136,6 +145,15 @@
   font-size: 1.1em;
   font-weight: bold;
   margin-left: 20px;
+  color: #eee
+}
+
+.no-orders-available{
+  margin-top: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-left: 20px;
+  color: #eee;
 }
 
 .modal {
@@ -179,4 +197,3 @@
   border: none;
   cursor: pointer;
 }
-

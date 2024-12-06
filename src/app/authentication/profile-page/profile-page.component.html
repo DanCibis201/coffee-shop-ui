@@ -1,0 +1,21 @@
+<div class="profile-page-background">
+    <div class="profile-container">
+        <h2>Profile</h2>
+    
+        <div *ngIf="user; else loading">
+            <div class="user-info">
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Username:</strong> {{ user.userName }}</p>
+            </div>
+        </div>
+    
+        <ng-template #loading>
+            <p>Loading user information...</p>
+        </ng-template>
+    
+        <div *ngIf="errorMessage" class="error-message">
+            <p>{{ errorMessage }}</p>
+        </div>
+    </div>
+    
+</div>
