@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-container">
-    <div class="site-name">CoffeeLovers</div>
+    <div class="site-name">CoffeeLovers <i class="fa-solid fa-mug-hot"></i></div>
     <ul>
       <li>
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
@@ -32,7 +32,7 @@
             <i style="margin-left: 5px;" class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
-            <a><i class="fa-solid fa-gear" style="margin-left: 10px;"></i> Profile</a>
+            <a routerLink="/profile" routerLinkActive="active"><i class="fa-solid fa-gear" style="margin-left: 10px;"></i> Profile</a>
             <a (click)="logout()"><i class="fa-solid fa-right-to-bracket" style="margin-left: 10px;"></i> Logout</a>
           </div>
         </div>

@@ -1,15 +1,24 @@
-<div class="row">
-  <div class="col-md-12" style="display: flex;flex-wrap: wrap; justify-content: space-around; margin: auto;">
+<div class="coffee-brands-background">
+  <div class="category-container">
+    <div class="brand-buttons">
+      <button *ngFor="let brand of brands"
+              (click)="toggleBrand(brand.id)"
+              [class.selected]="selectedBrand === brand.id">
+        {{ brand.name }}
+      </button>
+    </div>
+  </div>
+  <div class="products-header" style="margin-top: -25px;">
     <h2>Products</h2>
   </div>
-</div>
-<div class="container">
-  <div class="coffee-card" *ngFor="let coffee of coffees" (click)="viewDetails(coffee.id)">
-    <h3>{{ getBrandName(coffee.brand) }}</h3>
-    <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" class="coffee-image" />
-    <div class="coffee-info">
-      <h3>{{ coffee.name }}</h3>
-      <p>{{ coffee.price }} MDL</p>
+  <div class="container">
+    <div class="coffee-card" *ngFor="let coffee of filteredCoffees" (click)="viewDetails(coffee.id)">
+      <h3 style="color: #eee;">{{ getBrandName(coffee.brand) }}</h3>
+      <img [src]="coffee.imageUrl" alt="{{ coffee.name }}" class="coffee-image" />
+      <div class="coffee-info">
+        <h3>{{ coffee.name }}</h3>
+        <p>{{ coffee.price }} MDL</p>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,55 @@
+.profile-page-background{
+    min-height: 87.4vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(rgba(27, 27, 27, 0.4), rgb(0, 0, 0));
+    background-size: cover;
+    background-position: center;
+}
+
+/* Container to center content */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 70%;
+    height: 40%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+/* User info section */
+.user-info {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* Error message section */
+.error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Ensure the page has a minimum height for centering */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+}
+
+

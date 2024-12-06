@@ -7,6 +7,8 @@ import { CoffeeService } from '../../../services/coffee.service';
 import { OrderService } from '../../../services/order.service';
 import { NotificationService } from '../../../services/notification.service';
 import { Subscription, interval } from 'rxjs';
+import { CoffeeBrand } from '../../../models/mapping/coffee-brand.enum';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-coffee-details',
@@ -17,6 +19,7 @@ import { Subscription, interval } from 'rxjs';
 })
 
 export class CoffeeDetailsComponent implements OnInit {
+  user: any;
   coffee: Coffee | null = null;
   coffeeId: string | null = null;
   currentReview: { userName: string; rating: number; comment: string } | null = null;
@@ -24,13 +27,15 @@ export class CoffeeDetailsComponent implements OnInit {
   reviewSubscription: Subscription | null = null;
   isModalOpen = false;
   quantity: number = 1;
-
+  isLoggedIn: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
     private coffeeService: CoffeeService,
     private orderService: OrderService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthenticationService,
   ) { }
 
   ngOnInit(): void {
@@ -48,6 +53,23 @@ export class CoffeeDetailsComponent implements OnInit {
     } else {
       console.error('Coffee ID not found in route parameters');
     }
+    this.authService.isLoggedIn$.subscribe((state) => {
+      this.isLoggedIn = state;
+    });
+    this.authService.checkAuth();
+    this.authService.getUserInfo().subscribe({
+      next: (userData) => {
+          this.user = userData;
+      },
+      error: (err) => {
+          this.errorMessage = 'Failed to load user information';
+          console.error(err);
+      }
+    });
+  }
+
+  getBrandName(brand: number): string {
+    return CoffeeBrand[brand]
   }
 
   //#region PlaceOrderFunctionality

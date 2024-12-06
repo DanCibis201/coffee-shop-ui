@@ -1,48 +1,50 @@
-<div class="form-container">
-    <p class="title">Register</p>
-  
-    <form class="form" (ngSubmit)="onRegister()">
-      <input
-        id="email"
-        type="email"
-        class="input"
-        placeholder="Email"
-        [(ngModel)]="email"
-        name="email"
-        [ngClass]="{ 'input-error': emailError || email && !isEmailValid() }"
-        required
-      />
-  
-      <div *ngIf="!email" class="error-message">Email field is required.</div>
-      <div *ngIf="email && !isEmailValid()" class="error-message">Email format is wrong.</div>
-  
-      <div class="password-wrapper">
+<div class="register-background">
+  <div class="form-container">
+      <p class="title">Register</p>
+
+      <form class="form" (ngSubmit)="onRegister()">
         <input
-          id="password"
-          [type]="isPasswordVisible ? 'text' : 'password'"
+          id="email"
+          type="email"
           class="input"
-          placeholder="Password"
-          [(ngModel)]="password"
-          name="password"
-          [ngClass]="{ 'input-error': passwordError }"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          [ngClass]="{ 'input-error': emailError || email && !isEmailValid() }"
           required
         />
-        <i
-          class="fa"
-          [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"
-          (click)="togglePasswordVisibility()"
-          aria-hidden="true"
-        ></i>
+      
+        <div *ngIf="!email" class="error-message">Email field is required.</div>
+        <div *ngIf="email && !isEmailValid()" class="error-message">Email format is wrong.</div>
+      
+        <div class="password-wrapper">
+          <input
+            id="password"
+            [type]="isPasswordVisible ? 'text' : 'password'"
+            class="input"
+            placeholder="Password"
+            [(ngModel)]="password"
+            name="password"
+            [ngClass]="{ 'input-error': passwordError }"
+            required
+          />
+          <i
+            class="fa"
+            [ngClass]="isPasswordVisible ? 'fa-eye' : 'fa-eye-slash'"
+            (click)="togglePasswordVisibility()"
+            aria-hidden="true"
+          ></i>
+        </div>
+      
+        <div *ngIf="!password" class="error-message">Password field is required.</div>
+        <div *ngIf="invalidCredentials" class="error-message">Email or password is incorrect.</div>
+      
+        <button class="form-btn" type="submit">Register</button>
+      </form>
+    
+      <p class="log-in-label">Already have an account?</p>
+      <div>
+        <span class="log-in-link" (click)="goToLogin()">Log in</span>
       </div>
-  
-      <div *ngIf="!password" class="error-message">Password field is required.</div>
-      <div *ngIf="invalidCredentials" class="error-message">Email or password is incorrect.</div>
-  
-      <button class="form-btn" type="submit">Register</button>
-    </form>
-  
-    <p class="log-in-label">Already have an account?</p>
-    <div>
-      <span class="log-in-link" (click)="goToLogin()">Log in</span>
-    </div>
   </div>
+</div>
