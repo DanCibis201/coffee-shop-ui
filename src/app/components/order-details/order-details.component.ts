@@ -27,16 +27,16 @@ export class OrderDetailsComponent implements OnInit {
     private orderService: OrderService,
     private coffeeService: CoffeeService,
     private notificationService: NotificationService
-) {}
+  ) {}
 
-ngOnInit(): void {
-    this.orderService.getAllOrders().subscribe(
-      (orders) => {
-        this.orders = orders;
-        this.fetchCoffeeDetails(orders);
-      },
-      (error) => console.error('Error loading orders:', error)
-    );
+  ngOnInit(): void {
+      this.orderService.getAllOrders().subscribe(
+        (orders) => {
+          this.orders = orders;
+          this.fetchCoffeeDetails(orders);
+        },
+        (error) => console.error('Error loading orders:', error)
+      );
   }
 
   fetchCoffeeDetails(orders: Order[]): void {
@@ -52,6 +52,20 @@ ngOnInit(): void {
     });
   }
   
+  calculateOrderTotal(coffeeId: string, quantity: number): number {
+    const coffee = this.coffeeDetailsMap[coffeeId];
+    if (coffee) {
+      return coffee.price * quantity;
+    }
+    return 0;
+  }
+
+  calculateTotalPrice(): number {
+    return this.orders.reduce((total, order) => {
+      return total + this.calculateOrderTotal(order.coffeeId, order.quantity);
+    }, 0);
+  }
+
   //#region DeleteOrderDetails
   openDeleteModal(orderId: string): void {
     this.selectedOrderId = orderId;
@@ -119,18 +133,4 @@ ngOnInit(): void {
     }
   }
   //#endregion
-
-  calculateOrderTotal(coffeeId: string, quantity: number): number {
-    const coffee = this.coffeeDetailsMap[coffeeId];
-    if (coffee) {
-      return coffee.price * quantity;
-    }
-    return 0;
-  }
-
-  calculateTotalPrice(): number {
-    return this.orders.reduce((total, order) => {
-      return total + this.calculateOrderTotal(order.coffeeId, order.quantity);
-    }, 0);
-  }
 }

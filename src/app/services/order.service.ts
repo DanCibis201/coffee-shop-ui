@@ -27,11 +27,12 @@ export class OrderService {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  placeOrder(order: { coffeeId: string; quantity: number }): Observable<any> {
-    return this.http.post(this.apiUrl, order);
-  }
-
   updateOrder(order: Order): Observable<any> {
     return this.http.put(`${this.apiUrl}/${order.id}`, order, this.httpOptions);
+  }
+
+  upsertOrder(coffeeId: string, quantity: number): Observable<void> {
+    const payload = {coffeeId, quantity};
+    return this.http.post<void>(`${this.apiUrl}/upsert`, payload);
   }
 }
