@@ -2,7 +2,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(rgba(27, 27, 27, 0.4), rgb(0, 0, 0));
+    background: linear-gradient(rgba(13, 13, 13, 0.598), rgb(0, 0, 0));
     background-size: cover;
     background-position: center;
 }
