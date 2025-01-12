@@ -140,14 +140,6 @@
   font-size: 1.5rem;
 }
 
-.total-price {
-  margin-top: 20px;
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-left: 20px;
-  color: #eee
-}
-
 .no-orders-available{
   margin-top: 20px;
   font-size: 1.1em;
@@ -196,4 +188,44 @@
   padding: 8px 12px;
   border: none;
   cursor: pointer;
+}
+
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 15px 0;
+  width: 80%;
+  max-width: 600px;
+  color: white;
+}
+
+.pay-btn {
+  background-color: green;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: -40px;
+  width: 100px;
+}
+
+
+.proceed-btn {
+  background-color: blue;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }

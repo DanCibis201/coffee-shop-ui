@@ -21,8 +21,11 @@ export class AppComponent {
   }
   
   handleRouteChange(url: string): void {
-    if (url === '/' || url === '/contact' || url === '/orders' ||
-        url === '/login' || url === '/profile' || url ===  '/register' ) {
+    if (url === '/' || 
+        url === '/contact' ||
+        url === '/login' || 
+        url === '/profile' ||
+        url ===  '/register' ) {
       document.body.classList.remove('scrollable-page');
     } else {
       document.body.classList.add('scrollable-page');
