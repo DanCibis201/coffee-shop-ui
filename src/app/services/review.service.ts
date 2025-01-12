@@ -23,4 +23,15 @@ export class ReviewService {
     getReviewById(id: string): Observable<Review> {
         return this.http.get<Review>(`${this.apiUrl}/${id}`, {withCredentials: true});
     }
+
+    upsertReview(coffeeId: string, userName: string, comment: string, rating: number): Observable<void> {
+        const payload = { coffeeId, userName, comment, rating };
+        return this.http.post<void>(`${this.apiUrl}/upsert`, payload, {withCredentials: true});
+    }
+
+    //Fix this later:
+    deleteReview(id: string): Observable<void> {
+        const payload = { id };
+        return this.http.delete<void>(`${this.apiUrl}/${payload}`, {withCredentials: true});
+    }
 }

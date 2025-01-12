@@ -7,6 +7,7 @@ import { Coffee } from '../../models/coffee';
 import { CoffeeService } from '../../services/coffee.service';
 import { ConfirmationModalModule } from '../confirmation-modal/confirmation-modal.module';
 import { NotificationService } from '../../services/notification.service';
+import { PaymentService } from '../../services/payment.service';
 
 @Component({
   selector: 'app-order-details',
@@ -22,14 +23,17 @@ export class OrderDetailsComponent implements OnInit {
   newQuantity: number | null = null;
   isEditModalVisible: boolean = false;
   isDeleteModalVisible: boolean = false;
+  isPaymentModalVisible: boolean = false;
+  selectedPaymentMethod: string | null = null
 
   constructor(
     private orderService: OrderService,
     private coffeeService: CoffeeService,
-    private notificationService: NotificationService
-) {}
+    private notificationService: NotificationService,
+    private paymentService: PaymentService,
+  ) { }
 
-ngOnInit(): void {
+  ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(
       (orders) => {
         this.orders = orders;
@@ -51,7 +55,62 @@ ngOnInit(): void {
       }
     });
   }
+
+  calculateOrderTotal(coffeeId: string, quantity: number): number {
+    const coffee = this.coffeeDetailsMap[coffeeId];
+    if (coffee) {
+      return coffee.price * quantity;
+    }
+    return 0;
+  }
+
+  calculateTotalPrice(): number {
+    return this.orders.reduce((total, order) => {
+      return total + this.calculateOrderTotal(order.coffeeId, order.quantity);
+    }, 0);
+  }
+
+  //#region Payment
+  openPaymentModal(): void {
+    this.isPaymentModalVisible = true;
+  }
+
+  closePaymentModal(): void {
+    this.isPaymentModalVisible = false;
+    this.selectedPaymentMethod = null;
+  }
+
+  processPayment(): void {
+    if (this.selectedPaymentMethod) {
+      const amount = this.calculateTotalPrice();
+      let paymentObservable;
   
+      if (this.selectedPaymentMethod === 'card') {
+        paymentObservable = this.paymentService.processCreditCardPayment(amount);
+      } else if (this.selectedPaymentMethod === 'cash') {
+        paymentObservable = this.paymentService.processCashPayment(amount);
+      }
+  
+      if (paymentObservable) {
+        paymentObservable.subscribe(
+          (response) => {
+            this.notificationService.showNotification(response.message, 'green', 'white');
+            this.closePaymentModal();
+          },
+          (error) => {
+            console.error('Error:', error);
+            alert('Failed to process payment. Please try again.');
+          }
+        );
+      } else {
+        alert('Please select a valid payment method.');
+      }
+    } else {
+      alert('Please select a payment method.');
+    }
+  }
+  //#endregion
+
   //#region DeleteOrderDetails
   openDeleteModal(orderId: string): void {
     this.selectedOrderId = orderId;
@@ -65,8 +124,8 @@ ngOnInit(): void {
 
   cancelDelete(): void {
     this.closeDeleteModal();
-  } 
-   
+  }
+
   confirmDeleteOrder(): void {
     if (this.selectedOrderId) {
       this.orderService.deleteOrder(this.selectedOrderId).subscribe(
@@ -82,9 +141,9 @@ ngOnInit(): void {
       );
     }
   }
- //#endregion
+  //#endregion
 
- //#region EditOrderDetails
+  //#region EditOrderDetails
   openEditModal(orderId: string, currentQuantity: number): void {
     this.selectedOrderId = orderId;
     this.newQuantity = currentQuantity;
@@ -119,18 +178,4 @@ ngOnInit(): void {
     }
   }
   //#endregion
-
-  calculateOrderTotal(coffeeId: string, quantity: number): number {
-    const coffee = this.coffeeDetailsMap[coffeeId];
-    if (coffee) {
-      return coffee.price * quantity;
-    }
-    return 0;
-  }
-
-  calculateTotalPrice(): number {
-    return this.orders.reduce((total, order) => {
-      return total + this.calculateOrderTotal(order.coffeeId, order.quantity);
-    }, 0);
-  }
 }

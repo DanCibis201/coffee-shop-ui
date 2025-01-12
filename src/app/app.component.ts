@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NotificationComponent } from './components/notification/notification.component';
 
 @Component({
@@ -11,4 +11,24 @@ import { NotificationComponent } from './components/notification/notification.co
 })
 export class AppComponent {
   title = 'CoffeeShop';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.handleRouteChange(event.url);
+      }
+    });
+  }
+  
+  handleRouteChange(url: string): void {
+    if (url === '/' || 
+        url === '/contact' ||
+        url === '/login' || 
+        url === '/profile' ||
+        url ===  '/register' ) {
+      document.body.classList.remove('scrollable-page');
+    } else {
+      document.body.classList.add('scrollable-page');
+    }
+  }
 }

@@ -1,5 +1,5 @@
 .contact-us-background{
-  min-height: 87.9vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   background: linear-gradient(rgba(27, 27, 27, 0.4), rgb(0, 0, 0));
@@ -15,12 +15,12 @@
   }
   
   .contact-header h1 {
-    font-size: 2.5rem; /* Reduced font size */
+    font-size: 2.5rem;
     margin-bottom: 10px;
   }
   
   .contact-header p {
-    font-size: 1.4rem; /* Slightly smaller text */
+    font-size: 1.4rem;
     margin-top: 0;
   }
   
@@ -50,24 +50,24 @@
   /* Footer Section */
   .contact-footer {
     text-align: center;
-    padding: 20px 20px; /* Reduced padding */
+    padding: 20px 20px;
     background-color: #2a52be;
     color: white;
   }
   
   .contact-footer p {
-    font-size: 1.1rem; /* Reduced font size */
+    font-size: 1.1rem;
     margin: 0;
   }
   
   /* Responsive Design */
   @media (max-width: 768px) {
     .contact-header h1 {
-      font-size: 2.2rem; /* Adjusted for mobile */
+      font-size: 2.2rem;
     }
   
     .contact-header p {
-      font-size: 1.3rem; /* Adjusted for mobile */
+      font-size: 1.3rem; 
     }
   
     .contact-section h2 {
@@ -78,4 +78,3 @@
       font-size: 1.1rem;
     }
   }
-  

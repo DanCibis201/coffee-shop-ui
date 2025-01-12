@@ -42,8 +42,42 @@
 
   <div class="total-price">
     <h3>Total Sum: {{ calculateTotalPrice() | number: '1.2-2'}} MDL</h3>
+    <button (click)="openPaymentModal()" class="btn pay-btn">Pay</button>
   </div>
 
+  <!-- Payment Modal -->
+  <div *ngIf="isPaymentModalVisible" class="modal">
+    <div class="modal-content">
+      <h3>Choose Payment Method</h3>
+      <label>
+        <input
+          type="radio"
+          name="paymentMethod"
+          [(ngModel)]="selectedPaymentMethod"
+          value="card"
+        />
+        Credit Card
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="paymentMethod"
+          [(ngModel)]="selectedPaymentMethod"
+          value="cash"
+        />
+        Cash
+      </label>
+      <div class="modal-actions">
+        <button (click)="processPayment()" class="btn proceed-btn">
+          Proceed
+        </button>
+        <button (click)="closePaymentModal()" class="btn cancel-btn">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+  
   <!-- Edit Modal -->
   <div *ngIf="isEditModalVisible" class="modal">
   <div class="modal-content">
